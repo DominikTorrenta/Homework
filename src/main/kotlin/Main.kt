@@ -1,55 +1,44 @@
 fun main(args: Array<String>) {
 
-    var count = 5
+    data class User(var name: String, val surName: String, var age: Int)
+    var y = 0
+    var count = 10
     var x = 0
 
-    val nameArray = arrayOfNulls<String>(count)
-    val surnameArray = arrayOfNulls<String>(count)
-    val ageArray = arrayOfNulls<String>(count)
+    var peoples = mutableListOf<User>(
+        User("namePeople", "surnamePeople", 10),
+        User("namePeople", "surnamePeople", 10),
+        User("namePeople", "surnamePeople", 10),
+        User("namePeople", "surnamePeople", 10)
+    )
 
-    while(x<ageArray.size){
-        println ("Добро пожаловатьв наш торгово развлекательный центр, чтобы пройти в главный зал вам нужно указать свои контактные данные:")
+    while(y!=1) {
+        println("Здравствуйте, чтобы пройти в торговый центр вам нужно указать свои контактные данные:")
 
         print("Имя:")
-        val name = readLine().toString()
+        val namePeople = readLine().toString()
 
         print("Фамилия:")
-        val surname = readLine().toString()
+        val surnamePeople = readLine().toString()
 
-        print ("Возраст:")
-        var age = readLine()!!.toInt()
+        print("Возраст:")
+        var agePeople = readLine()!!.toInt()
 
-        if (age>=18) {
-            InputArray(nameArray,x, name, surnameArray, surname, ageArray, age)
-            println("$name $surname можете пройти в торговый центр")
-            x=x+1
-        }else{ if(age<14){
-            println("$name $surname вы должны пройти с полицией")
-        } else println("$name $surname мы не можем впустить вас")
+        println("$namePeople $surnamePeople: вы можете пройти пройти в торговый центр")
 
-        }
+        val people = User(namePeople, surnamePeople, agePeople)
+
+        peoples[x]=people
+
+        println("0 - продолжить работу")
+        println("1 - завершить работу")
+
+        y = readLine()!!.toInt()
+        x++
     }
+    peoples.sortBy { it.surName }
 
-    OutputArray (nameArray, surnameArray, ageArray)
-    println("Это были данные первых пяти совершеннолетних посетителях")
-}
-
-fun InputArray(nameArray: Array<String?>, x: Int, name: String, surnameArray: Array<String?>, surname: String, ageArray: Array<String?>, age: Int){
-    nameArray[x]= "$name"
-    surnameArray [x] ="$surname"
-    ageArray[x]="$age"
-}
-
-fun OutputArray(nameArray: Array<String?>, surnameArray: Array<String?>, ageArray: Array<String?>){
-    val count = 5
-    var y =0
-
-    while(y<count){
-        print(nameArray[y])
-        print(" ")
-        print(surnameArray [y])
-        print(" возраст:")
-        println(ageArray[y])
-        y++
+    peoples.forEach{
+        println("name: ${it.name}, surName: ${it.surName}, Age: ${it.age}")
     }
 }
